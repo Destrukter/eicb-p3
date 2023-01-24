@@ -1,0 +1,13 @@
+function void main() {
+	// check that the loop iterates 0 times
+	var int x;
+	var int c;
+	for(x = 0; false; x = x) {
+		printString("oops");
+		printLine();
+	}
+	printString("The loop iterated ");
+	printInt(c);
+	printString(" times.");
+	printLine();
+}

@@ -1,0 +1,4 @@
+Start!
+1. compound statement
+2. compound statement
+The program has finished successfully.

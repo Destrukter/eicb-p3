@@ -1,0 +1,6 @@
+//SUBVEC3
+function void main(){
+    var vector<int>[1] v;
+    val vector<int>[1] test = v{0 : 0 : 0};
+    printInt(test[0]);
+}

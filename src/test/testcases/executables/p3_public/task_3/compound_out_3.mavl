@@ -1,0 +1,26 @@
+//COMPOUND3
+function void main(){
+    {
+        {
+            printString("Start!");
+            printLine();
+        }
+    }
+    val int a = test();
+    {
+        {
+        }
+        {
+            printString("a:");
+            {
+                printString(" ");
+            }
+        }
+    }
+    printInt(a);
+    printLine();
+}
+
+function int test(){
+    return 42;
+}

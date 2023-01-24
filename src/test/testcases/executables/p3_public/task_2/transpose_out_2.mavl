@@ -1,0 +1,59 @@
+//TRANSPOSE1
+function void main(){
+    val matrix<int>[3][3] original = [[1, 2, 3],
+                                      [4, 5, 6],
+                                      [7, 8, 9]];
+
+    val matrix<int>[3][3] transposed = ~original;
+
+    printString("original:");
+    printLine();
+
+    printInt(original[0][0]);
+    printString(", ");
+    printInt(original[0][1]);
+    printString(", ");
+    printInt(original[0][2]);
+    printLine();
+
+    printInt(original[1][0]);
+    printString(", ");
+    printInt(original[1][1]);
+    printString(", ");
+    printInt(original[1][2]);
+    printLine();
+
+    printInt(original[2][0]);
+    printString(", ");
+    printInt(original[2][1]);
+    printString(", ");
+    printInt(original[2][2]);
+    printLine();
+
+
+
+    printString("transposed:");
+    printLine();
+
+    printInt(transposed[0][0]);
+    printString(", ");
+    printInt(transposed[0][1]);
+    printString(", ");
+    printInt(transposed[0][2]);
+    printLine();
+
+    printInt(transposed[1][0]);
+    printString(", ");
+    printInt(transposed[1][1]);
+    printString(", ");
+    printInt(transposed[1][2]);
+    printLine();
+
+    printInt(transposed[2][0]);
+    printString(", ");
+    printInt(transposed[2][1]);
+    printString(", ");
+    printInt(transposed[2][2]);
+    printLine();
+
+}

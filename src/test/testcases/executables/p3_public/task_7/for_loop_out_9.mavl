@@ -1,0 +1,10 @@
+function void main() {
+	var int x;
+	var int i;
+	i = 5;
+	// check that init and incr variables can be different
+	for(x = 10; i > 0; i = i - 1) {
+		printInt(x + i);
+		printLine();
+	}
+}

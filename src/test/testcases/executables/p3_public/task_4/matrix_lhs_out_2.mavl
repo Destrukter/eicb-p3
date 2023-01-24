@@ -1,0 +1,14 @@
+//MLHS2
+function void main(){
+    var matrix<int>[3][4] mat;
+    mat = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]];
+
+    var int i;
+    var int j;
+    mat[0][1] = mat[0][1] + 1;
+    mat[1][2] = mat[0][1] + 1;
+    mat[2][3] = mat[2][3] + 3;
+
+    printInt(mat[2][3]);
+    printLine();
+}

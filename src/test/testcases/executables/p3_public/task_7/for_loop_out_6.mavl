@@ -1,0 +1,8 @@
+//FOR6
+function void main() {
+    var int i;
+    for(i = 0; i > -9; i = i-2){
+        printInt(i);
+        printLine();
+    }
+}

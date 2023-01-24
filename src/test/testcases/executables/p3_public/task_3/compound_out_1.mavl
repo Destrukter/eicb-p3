@@ -1,0 +1,18 @@
+//COMPOUND1
+function void main(){
+    printString("Start!");
+    printLine();
+    {
+        printInt(1);
+        printString(". compound statement");
+        printLine();
+        {
+        }
+    }
+
+    {
+        printInt(2);
+        printString(". compound statement");
+    }
+
+}

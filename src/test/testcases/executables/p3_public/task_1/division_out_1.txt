@@ -1,0 +1,4 @@
+3.0
+3
+
+The program has finished successfully.

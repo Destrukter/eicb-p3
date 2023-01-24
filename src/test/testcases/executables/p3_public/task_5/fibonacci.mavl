@@ -1,0 +1,14 @@
+function int fib(int a) {
+    var int result;
+    if(a==1 | a==2) {
+        result = 1;
+    } else {
+        result = fib(a-1) + fib(a-2);
+    }
+    return result;
+}
+
+function void main() {
+    printInt(fib(10));
+    printLine();
+}

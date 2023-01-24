@@ -1,0 +1,17 @@
+function int gcd(int a, int b) {
+    var int result;
+
+    if (b == 0) result = a;
+    else
+        if (a == 0) result = b;
+        else
+            if (a > b) result = gcd(a - b, b);
+            else result = gcd(a, b - a);
+
+    return result;
+}
+
+function void main() {
+    printInt(gcd(12, 10));
+    printLine();
+}

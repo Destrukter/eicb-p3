@@ -1,0 +1,13 @@
+//RLHS2
+record rec {
+    var int i;
+    val int j;
+}
+
+function void main(){
+    var rec x;
+    x = @rec[1, 2];
+    x@i = x@j * 2;
+    printInt(x@i);
+    printLine();
+}

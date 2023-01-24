@@ -1,0 +1,21 @@
+function void main() {
+	val int stackGuard = 10;
+	
+	val bool t = true;
+	val bool f = false;
+	
+	printBool(f & f);
+	printLine();
+	
+	printBool(f & t);
+	printLine();
+	
+	printBool(t & f);
+	printLine();
+	
+	printBool(t & t);
+	printLine();
+	
+	printInt(stackGuard);
+	printLine();
+}
