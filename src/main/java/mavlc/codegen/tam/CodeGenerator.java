@@ -121,8 +121,7 @@ public class CodeGenerator extends AstNodeBaseVisitor<Instruction, Void> {
 	
 	@Override
 	public Instruction visitLeftHandIdentifier(LeftHandIdentifier leftHandIdentifier, Void __) {
-		// TODO implement (task 3.4)
-		throw new UnsupportedOperationException();
+		visit(leftHandIdentifier);
 	}
 	
 	@Override
@@ -260,7 +259,6 @@ public class CodeGenerator extends AstNodeBaseVisitor<Instruction, Void> {
 		// discard return value if it exists
 		int resultSize = callStatement.callExpression.getCalleeDefinition().getReturnType().wordSize;
 		if(resultSize != 0) assembler.emitPop(0, resultSize).addComment("discard return value", false);
-		
 		return null;
 	}
 	
@@ -599,8 +597,13 @@ public class CodeGenerator extends AstNodeBaseVisitor<Instruction, Void> {
 	
 	@Override
 	public Instruction visitDivision(Division division, Void __) {
-		// TODO implement (task 3.1)
-		throw new UnsupportedOperationException();
+		visit(division.leftOperand);
+		visit(division.rightOperand);
+		if (division.leftOperand.getType().equals(IntType.instance))
+			assembler.emitIntegerDivision();
+		else
+			assembler.emitFloatDivision();
+		return null;
 	}
 	
 	@Override
@@ -611,14 +614,21 @@ public class CodeGenerator extends AstNodeBaseVisitor<Instruction, Void> {
 	
 	@Override
 	public Instruction visitCompare(Compare compare, Void __) {
-		// TODO implement (task 3.1)
-		throw new UnsupportedOperationException();
+		visit(compare.leftOperand);
+		visit(compare.rightOperand);
+		if (compare.rightOperand.getType().equals(IntType.instance))
+			assembler.emitIntegerComparison(compare.comparator);
+		else
+			assembler.emitFloatComparison(compare.comparator);
+		return null;
 	}
 	
 	@Override
 	public Instruction visitAnd(And and, Void __) {
-		// TODO implement (task 3.1)
-		throw new UnsupportedOperationException();
+		visit(and.leftOperand);
+		visit(and.rightOperand);
+		assembler.emitLogicalAnd();
+		return null;
 	}
 	
 	@Override
@@ -631,8 +641,18 @@ public class CodeGenerator extends AstNodeBaseVisitor<Instruction, Void> {
 	
 	@Override
 	public Instruction visitMatrixTranspose(MatrixTranspose matrixTranspose, Void __) {
-		// TODO implement (task 3.2)
-		throw new UnsupportedOperationException();
+		visit(matrixTranspose.operand);
+
+		StructType mType = (StructType) matrixTranspose.operand.getType();
+
+		if (!(mType instanceof MatrixType))
+			throw new InternalCompilerError("no");
+
+		MatrixType mMat = (MatrixType) mType;
+
+
+
+		assembler.emitMatrixTranspose();
 	}
 	
 	@Override
@@ -847,8 +867,8 @@ public class CodeGenerator extends AstNodeBaseVisitor<Instruction, Void> {
 	
 	@Override
 	public Instruction visitIntValue(IntValue intValue, Void __) {
-		// TODO implement (task 3.1)
-		throw new UnsupportedOperationException();
+		assembler.loadIntegerValue(intValue.value);
+		return null;
 	}
 	
 	@Override
