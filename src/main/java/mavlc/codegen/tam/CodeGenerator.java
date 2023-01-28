@@ -650,15 +650,13 @@ public class CodeGenerator extends AstNodeBaseVisitor<Instruction, Void> {
 	@Override
 	public Instruction visitMatrixTranspose(MatrixTranspose matrixTranspose, Void __) {
 		visit(matrixTranspose.operand);
+		StructType Type = (StructType) matrixTranspose.getType();
+		MatrixType Mat = (MatrixType) Type;
+		assembler.loadIntegerValue(Mat.rows);
+		assembler.loadIntegerValue(Mat.cols);
 
-		StructType mType = (StructType) matrixTranspose.operand.getType();
-
-		if (!(mType instanceof MatrixType))
-			throw new InternalCompilerError("no");
-
-		MatrixType mMat = (MatrixType) mType;
-
-		return assembler.emitMatrixTranspose();
+		assembler.emitMatrixTranspose();
+		return null;
 	}
 
 	@Override
