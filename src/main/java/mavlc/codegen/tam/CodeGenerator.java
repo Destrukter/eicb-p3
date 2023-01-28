@@ -116,31 +116,48 @@ public class CodeGenerator extends AstNodeBaseVisitor<Instruction, Void> {
 
 	@Override
 	public Instruction visitVariableAssignment(VariableAssignment variableAssignment, Void __) {
-		// TODO implement (task 3.4)
-		throw new UnsupportedOperationException();
+		visit(variableAssignment.value);
+		visit(variableAssignment.identifier);
+		assembler.storeToStackAddress(variableAssignment.value.getType().wordSize);
+		return null;
 	}
 
 	@Override
 	public Instruction visitLeftHandIdentifier(LeftHandIdentifier leftHandIdentifier, Void __) {
-		return visit(leftHandIdentifier);
+		assembler.loadAddress(Register.LB, leftHandIdentifier.getDeclaration().getLocalBaseOffset());
+		return null;
 	}
 
 	@Override
 	public Instruction visitMatrixLhsIdentifier(MatrixLhsIdentifier matrixLhsIdentifier, Void __) {
-		// TODO implement (task 3.4)
-		throw new UnsupportedOperationException();
+		var t = (MatrixType) matrixLhsIdentifier.getDeclaration().getType();
+		visit(matrixLhsIdentifier.rowIndexExpression);
+		assembler.emitBoundsCheck(0, t.rows);
+		assembler.loadIntegerValue(t.cols);
+		assembler.emitIntegerMultiplication();
+		visit(matrixLhsIdentifier.colIndexExpression);
+		assembler.emitBoundsCheck(0, t.cols);
+		assembler.emitIntegerAddition();
+		assembler.loadAddress(Register.LB,
+				matrixLhsIdentifier.getDeclaration().getLocalBaseOffset());
+		assembler.emitIntegerAddition();
+		return null;
 	}
 
 	@Override
 	public Instruction visitVectorLhsIdentifier(VectorLhsIdentifier vectorLhsIdentifier, Void __) {
-		// TODO implement (task 3.4)
-		throw new UnsupportedOperationException();
+		var t = (VectorType) vectorLhsIdentifier.getDeclaration().getType();
+		visit(vectorLhsIdentifier.indexExpression);
+		assembler.emitBoundsCheck(0, t.dimension);
+		assembler.loadAddress(Register.LB, vectorLhsIdentifier.getDeclaration().getLocalBaseOffset());
+		assembler.emitIntegerAddition();
+		return null;
 	}
 
 	@Override
 	public Instruction visitRecordLhsIdentifier(RecordLhsIdentifier recordLhsIdentifier, Void __) {
-		// TODO implement (task 3.4)
-		throw new UnsupportedOperationException();
+		visit(recordLhsIdentifier.getDeclaration());
+		return null;
 	}
 
 	@Override
