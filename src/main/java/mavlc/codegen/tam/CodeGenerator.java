@@ -266,7 +266,25 @@ public class CodeGenerator extends AstNodeBaseVisitor<Instruction, Void> {
 	@Override
 	public Instruction visitIfStatement(IfStatement ifStatement, Void __) {
 		// TODO implement (task 3.5)
-		throw new UnsupportedOperationException();
+
+		visit(ifStatement.condition);
+
+		Instruction jumpElse = assembler.emitConditionalJump(false, -1);
+		int ifOffset = assembler.getNextOffset();
+		visit(ifStatement.thenStatement);
+		assembler.resetNextOffset(ifOffset);
+		Instruction jumpEnd = assembler.emitJump(-1);
+
+		int startElse = assembler.getNextInstructionAddress();
+		assembler.backPatchJump(jumpElse, startElse);
+		int elseOffset = assembler.getNextOffset();
+		visit(ifStatement.elseStatement);
+		assembler.resetNextOffset(elseOffset);
+
+		int startEnd = assembler.getNextInstructionAddress();
+		assembler.backPatchJump(jumpEnd, startEnd);
+
+		return null;
 	}
 
 	@Override
