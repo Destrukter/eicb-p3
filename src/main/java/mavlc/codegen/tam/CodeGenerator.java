@@ -27,7 +27,6 @@ import mtam.Primitive;
 import mtam.Register;
 import mtam.interpreter.Value;
 
-import java.sql.Struct;
 import java.util.ArrayList;
 import java.util.List;
 
