@@ -1,0 +1,10 @@
+//COMPOUND3
+function void main(){
+    val int a = 42;
+    {
+        printInt(a);
+        val int a = 43;
+        printInt(a);
+    }
+    printInt(a);
+}

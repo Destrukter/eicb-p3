@@ -273,8 +273,10 @@ public class CodeGenerator extends AstNodeBaseVisitor<Instruction, Void> {
 
 	@Override
 	public Instruction visitCompoundStatement(CompoundStatement compoundStatement, Void __) {
-		// TODO implement (task 3.3)
-		throw new UnsupportedOperationException();
+		compoundStatement.statements.forEach((s) -> {
+			visit(s);
+		});
+		return null;
 	}
 
 	@Override
