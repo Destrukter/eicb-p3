@@ -27,6 +27,7 @@ import mtam.Primitive;
 import mtam.Register;
 import mtam.interpreter.Value;
 
+import java.sql.Struct;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -884,8 +885,16 @@ public class CodeGenerator extends AstNodeBaseVisitor<Instruction, Void> {
 
 	@Override
 	public Instruction visitSubVector(SubVector subVector, Void __) {
-		// TODO implement (task 3.6)
-		throw new UnsupportedOperationException();
+		VectorType t = (VectorType) subVector.getType();
+		visit(subVector.baseIndexExpression);
+		visit(subVector.startOffsetExpression);
+		assembler.emitIntegerAddition();
+		assembler.emitBoundsCheck(0, t.dimension);
+		visit(subVector.baseIndexExpression);
+		visit(subVector.endOffsetExpression);
+		assembler.emitIntegerAddition();
+		assembler.emitBoundsCheck(0, t.dimension);
+		return null;
 	}
 
 	@Override
