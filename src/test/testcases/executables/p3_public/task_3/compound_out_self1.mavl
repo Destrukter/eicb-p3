@@ -1,4 +1,3 @@
-//COMPOUND3
 function void main(){
     val int a = 42;
     {

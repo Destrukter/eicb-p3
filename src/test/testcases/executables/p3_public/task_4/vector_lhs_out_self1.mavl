@@ -1,0 +1,18 @@
+function void main(){
+    var vector<float>[3] vec;
+    vec[1] = 4.04;
+    printFloat(vec[1]);
+    printLine();
+    vec = [1.0, 2.0, 3.0];
+    printFloat(vec[1]);
+    printLine();
+    vec[1] = 4.04;
+    printFloat(vec[1]);
+    printLine();
+    printFloat(vec[0]);
+    printString(" ");
+    printFloat(vec[1]);
+    printString(" ");
+    printFloat(vec[2]);
+    printLine();
+}
