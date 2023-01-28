@@ -908,15 +908,20 @@ public class CodeGenerator extends AstNodeBaseVisitor<Instruction, Void> {
 
 	@Override
 	public Instruction visitSubVector(SubVector subVector, Void __) {
-		VectorType t = (VectorType) subVector.getType();
+		var result = (VectorType) subVector.getType();
+		var vector = (VectorType) subVector.structExpression.getType();
+		var vecSize = vector.wordSize;
+		var resSize = result.wordSize;
+		assembler.loadAddress(Register.ST, -vecSize - resSize);
+
 		visit(subVector.baseIndexExpression);
 		visit(subVector.startOffsetExpression);
 		assembler.emitIntegerAddition();
-		assembler.emitBoundsCheck(0, t.dimension);
-		visit(subVector.baseIndexExpression);
-		visit(subVector.endOffsetExpression);
 		assembler.emitIntegerAddition();
-		assembler.emitBoundsCheck(0, t.dimension);
+
+		int loadSize = Math.abs(subVector.getStartOffset()) + Math.abs(subVector.getEndOffset()) + 1;
+		assembler.loadFromStackAddress(loadSize);
+
 		return null;
 	}
 

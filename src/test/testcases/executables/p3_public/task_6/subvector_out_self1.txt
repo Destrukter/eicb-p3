@@ -1,0 +1,12 @@
+vec:
+1
+2
+3
+4
+5
+sub:
+2
+3
+4
+
+The program has finished successfully.

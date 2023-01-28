@@ -1,0 +1,28 @@
+function void main(){
+    var vector<int>[5] vec;
+	vec = [1,2,3,4,5];
+	var vector<int>[3] sub;
+	sub = vec{-1:2:1};
+
+	printString("vec:");
+	printLine();
+	printInt(vec[0]);
+	printLine();
+	printInt(vec[1]);
+	printLine();
+	printInt(vec[2]);
+	printLine();
+	printInt(vec[3]);
+	printLine();
+	printInt(vec[4]);
+	printLine();
+	
+	printString("sub:");
+	printLine();
+	printInt(sub[0]);
+	printLine();
+	printInt(sub[1]);
+	printLine();
+	printInt(sub[2]);
+	printLine();
+}
