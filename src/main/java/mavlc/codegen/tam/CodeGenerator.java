@@ -163,7 +163,31 @@ public class CodeGenerator extends AstNodeBaseVisitor<Instruction, Void> {
 	@Override
 	public Instruction visitForLoop(ForLoop forLoop, Void __) {
 		// TODO implement (task 3.7)
-		throw new UnsupportedOperationException();
+
+		// forLoop.initVarName;
+		visit(forLoop.initExpression);
+		assembler.loadAddress(Register.LB, forLoop.getInitVarDeclaration().getLocalBaseOffset());
+		assembler.storeToStackAddress(1);
+
+		visit(forLoop.loopCondition);
+		Instruction jumpEnd = assembler.emitConditionalJump(false, -1);
+
+		int startStart = assembler.getNextInstructionAddress();
+		int Offset = assembler.getNextOffset();
+		visit(forLoop.body);
+		assembler.resetNextOffset(Offset);
+
+		visit(forLoop.incrExpression);
+		assembler.loadAddress(Register.LB, forLoop.getIncrVarDeclaration().getLocalBaseOffset());
+		assembler.storeToStackAddress(1);
+
+		visit(forLoop.loopCondition);
+		assembler.emitConditionalJump(true, startStart);
+
+		int startEnd = assembler.getNextInstructionAddress();
+		assembler.backPatchJump(jumpEnd, startEnd);
+
+		return null;
 	}
 
 	@Override
